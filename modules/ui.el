@@ -23,27 +23,61 @@
     (doom-themes-org-config)))
 
 ;; Which-key - shows available keybindings
-;; (use-package which-key
-;;   :config
-;;   (which-key-mode)
-;;   (setq which-key-idle-delay 0.3))
+(use-package which-key
+  :demand t
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 0.5
+        which-key-sort-order 'which-key-key-order-alpha))
 
 ;; Modeline
-;; (use-package doom-modeline
-;;   :init (doom-modeline-mode 1)
-;;   :config
-;;   (setq doom-modeline-height 25
-;;         doom-modeline-bar-width 3
-;;         doom-modeline-project-detection 'projectile))
+(use-package doom-modeline
+  :demand t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 25
+        doom-modeline-bar-width 3
+        doom-modeline-project-detection 'projectile
+        doom-modeline-buffer-file-name-style 'truncate-with-project
+        doom-modeline-icon t
+        doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-color-icon t
+        doom-modeline-buffer-state-icon t
+        doom-modeline-buffer-modification-icon t
+        doom-modeline-minor-modes nil
+        doom-modeline-enable-word-count nil
+        doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)))
 
-;; All-the-icons (required for doom-modeline)
-;; (use-package all-the-icons
-;;   :if (display-graphic-p))
+;; Rainbow delimiters - colorful parentheses
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; Highlight TODO keywords
-;; (use-package hl-todo
-;;   :config
-;;   (global-hl-todo-mode))
+(use-package hl-todo
+  :demand t
+  :config
+  (global-hl-todo-mode)
+  (setq hl-todo-keyword-faces
+        '(("TODO"   . "#ff6c6b")
+          ("FIXME"  . "#ff6c6b")
+          ("HACK"   . "#da8548")
+          ("REVIEW" . "#51afef")
+          ("NOTE"   . "#98be65")
+          ("DEPRECATED" . "#bbc2cf"))))
+
+;;; Window management
+;; Ace-window - quick window switching
+(use-package ace-window
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+        aw-scope 'frame))
+
+;; Winner-mode - undo/redo window layouts
+(use-package winner
+  :demand t
+  :config
+  (winner-mode 1))
 
 ;;; All-the-icons (for dashboard icons)
 (use-package all-the-icons

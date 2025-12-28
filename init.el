@@ -87,6 +87,7 @@
 (require 'ui)         ; UI and themes
 (require 'completion) ; Completion frameworks
 (require 'tools)      ; Git, projectile, etc.
+(require 'keybindings) ; Leader keybindings (SPC)
 
 ;; Load language support
 (require 'lang)       ; General LSP/programming setup

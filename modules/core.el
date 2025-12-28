@@ -79,7 +79,50 @@
                                 (lambda () (org-update-statistics-cookies t))
                                 nil 'local)))
   :config
-  (setq org-checkbox-hierarchical-statistics nil))  ; Count all boxes, not just direct children
+  (setq org-checkbox-hierarchical-statistics nil  ; Count all boxes, not just direct children
+        org-hide-emphasis-markers t
+        org-pretty-entities t
+        org-ellipsis " ▾"
+        org-agenda-files '("~/org/")
+        org-log-done 'time
+        org-log-into-drawer t))
+
+;; Org-modern - modern org-mode styling
+(use-package org-modern
+  :hook (org-mode . org-modern-mode)
+  :config
+  (setq org-modern-star '("●" "○" "✸" "✿")
+        org-modern-table-vertical 1
+        org-modern-table-horizontal 0.2
+        org-modern-list '((43 . "➤")
+                          (45 . "–")
+                          (42 . "•"))))
+
+;; Org-appear - hide markup until cursor reaches it
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autolinks t
+        org-appear-autosubmarkers t
+        org-appear-autoentities t
+        org-appear-autokeywords t
+        org-appear-inside-latex t))
+
+;; Org-roam - Zettelkasten note-taking
+(use-package org-roam
+  :demand t
+  :custom
+  (org-roam-directory "~/org/roam/")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  (org-roam-db-autosync-mode)
+  (setq org-roam-node-display-template
+        (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag))))
 
 (provide 'core)
 ;;; core.el ends here

@@ -31,7 +31,9 @@
   :after evil
   :demand t
   :config
-  (setq evil-collection-mode-list '(dired ibuffer magit help))
+  (setq evil-collection-mode-list '(dired ibuffer magit help vterm
+                                     dashboard company elfeed
+                                     calendar ace-window))
   (evil-collection-init))
 
 ;; Undo system for evil
@@ -147,6 +149,43 @@
   :init
   (with-eval-after-load 'evil
     (evil-exchange-install)))
+
+;;; Multiple cursors
+(use-package evil-mc
+  :after evil
+  :demand t
+  :config
+  (global-evil-mc-mode 1)
+  :bind (:map evil-normal-state-map
+              ("C-n" . evil-mc-make-and-goto-next-match)
+              ("C-p" . evil-mc-make-and-goto-prev-match)))
+
+;;; Smart parentheses
+(use-package smartparens
+  :demand t
+  :config
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  (show-smartparens-global-mode 1)
+  (setq sp-highlight-pair-overlay nil
+        sp-highlight-wrap-overlay nil
+        sp-highlight-wrap-tag-overlay nil))
+
+;; Evil integration for smartparens
+(use-package evil-smartparens
+  :after (evil smartparens)
+  :hook (smartparens-enabled . evil-smartparens-mode))
+
+;;; Expand region intelligently
+(use-package expand-region
+  :bind (("C-=" . er/expand-region)
+         ("C--" . er/contract-region)))
+
+;;; Avy - jump to visible text
+(use-package avy
+  :bind (("C-'" . avy-goto-char-2)
+         ("C-:" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1)))
 
 (provide 'editor)
 ;;; editor.el ends here
