@@ -1,0 +1,25 @@
+# Emacs auto-generated files
+*~
+\#*\#
+.\#*
+.DS_Store
+
+# Package management
+.local/
+straight/versions/
+straight/build/
+straight/build-cache.el
+straight/repos/
+
+# Runtime files
+recentf
+auto-save-list/
+custom.el
+eln-cache/
+transient/
+*.elc
+*.eln
+
+# Backup files
+*~
+*.bak
