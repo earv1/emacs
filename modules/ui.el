@@ -54,9 +54,8 @@
 
 ;; Highlight TODO keywords
 (use-package hl-todo
-  :demand t
+  :hook (prog-mode . hl-todo-mode)
   :config
-  (global-hl-todo-mode)
   (setq hl-todo-keyword-faces
         '(("TODO"   . "#ff6c6b")
           ("FIXME"  . "#ff6c6b")

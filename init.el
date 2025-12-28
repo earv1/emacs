@@ -54,12 +54,18 @@
       use-package-expand-minimally nil  ; Keep full expansion for proper integration
       use-package-compute-statistics nil)
 
-;;; Startup benchmark (comment out after tuning)
+;;; Startup profiling and benchmarking
+;; benchmark-init - see what takes time during startup
 (use-package benchmark-init
   :demand t
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
+;; esup - Emacs Start Up Profiler (interactive profiler)
+;; Usage: M-x esup
+(use-package esup
+  :commands (esup))
 
 ;;; Smart garbage collection
 ;; GCMH - the Garbage Collector Magic Hack

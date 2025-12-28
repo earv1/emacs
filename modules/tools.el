@@ -29,13 +29,11 @@
 
 ;; Show git changes in the fringe/margin
 (use-package diff-hl
-  :demand t
+  :hook ((prog-mode . diff-hl-mode)
+         (magit-pre-refresh . diff-hl-magit-pre-refresh)
+         (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
-  (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
-  :hook
-  (magit-pre-refresh . diff-hl-magit-pre-refresh)
-  (magit-post-refresh . diff-hl-magit-post-refresh))
+  (diff-hl-flydiff-mode))
 
 ;; Git modes - for .gitignore, .gitconfig, etc.
 (use-package git-modes
@@ -99,18 +97,15 @@
 
 ;;; Syntax checking
 (use-package flycheck
-  :demand t
-  :init (global-flycheck-mode)
+  :hook (prog-mode . flycheck-mode)
   :config
   (setq flycheck-check-syntax-automatically '(save mode-enabled)
         flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 ;;; Tree-sitter - Better syntax highlighting
 (use-package tree-sitter
-  :demand t
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  :hook ((prog-mode . tree-sitter-mode)
+         (tree-sitter-after-on . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs
   :after tree-sitter)

@@ -162,11 +162,9 @@
 
 ;;; Smart parentheses
 (use-package smartparens
-  :demand t
+  :hook (prog-mode . smartparens-mode)
   :config
   (require 'smartparens-config)
-  (smartparens-global-mode 1)
-  (show-smartparens-global-mode 1)
   (setq sp-highlight-pair-overlay nil
         sp-highlight-wrap-overlay nil
         sp-highlight-wrap-tag-overlay nil))

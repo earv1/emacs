@@ -80,30 +80,24 @@
 
 ;;; In-buffer completion
 (use-package company
-  :demand t
+  :hook (prog-mode . company-mode)
   :config
-  (global-company-mode)
   (setq company-idle-delay 0.1
         company-minimum-prefix-length 2
         company-selection-wrap-around t
         company-tooltip-align-annotations t
         company-require-match nil
         company-dabbrev-downcase nil
-        company-dabbrev-ignore-case nil))
-
-;; Company Evil integration
-(use-package company
-  :after evil
-  :config
-  ;; Use C-j/C-k in company completion
-  (define-key company-active-map (kbd "C-j") 'company-select-next)
-  (define-key company-active-map (kbd "C-k") 'company-select-previous))
+        company-dabbrev-ignore-case nil)
+  ;; Evil integration
+  (with-eval-after-load 'evil
+    (define-key company-active-map (kbd "C-j") 'company-select-next)
+    (define-key company-active-map (kbd "C-k") 'company-select-previous)))
 
 ;;; Snippets
 (use-package yasnippet
-  :demand t
+  :hook (prog-mode . yas-minor-mode)
   :config
-  (yas-global-mode 1)
   (setq yas-snippet-dirs '("~/.config/emacs/snippets")))
 
 (use-package yasnippet-snippets
