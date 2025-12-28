@@ -17,6 +17,11 @@ auto-save-list/
 custom.el
 eln-cache/
 transient/
+history
+places
+org-roam.db
+org-roam.db-shm
+org-roam.db-wal
 *.elc
 *.eln
 
