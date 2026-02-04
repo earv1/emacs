@@ -97,6 +97,7 @@
 
 ;; Load language support
 (require 'lang)       ; General LSP/programming setup
+(require 'markdown)   ; Markdown support
 ;; (require 'python)     ; Python support
 ;; (require 'javascript) ; JavaScript/TypeScript support
 ;; (require 'rust)       ; Rust support
